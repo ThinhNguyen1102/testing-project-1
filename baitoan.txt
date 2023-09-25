@@ -1,0 +1,68 @@
+Bài toán
+  Một cửa hàng tiến hành đợt khuyến mãi 
+  Khách hàng
+  - Khách hàng mới: được giảm giá 5% 
+  - Khách hàng hạng Bạc: được giảm giá 10% 
+  - Khách hàng hạng vàng: được giảm giá 20% 
+  Giá trị đơn hàng
+  - Với đơn hàng từ 500k được giảm thêm 10%
+  - Với đơn hàng từ 1500k được giảm thêm 20% không cộng dồn với mức trước
+  - Với đơn hàng từ 3000k được giảm thêm 30% không cộng dồn với mức trước
+  Theo voucher: 
+  - voucher chỉ áp dụng với đơn hàng trên 1000k
+  - voucher có các mức giảm giảm 10% 30% 50%
+
+
+Phân hoạch tương đương
+  - Khách hàng: KHmoi, KHbac, KHvang
+  - Giá trị đơn hàng: (-vc:0] U (0, 500) U [500, 1500) U [1500, 3000) U [3000, +vc)
+  - voucher: 10%, 30%
+
+Test case
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: -100 || voucher?: null    => invalid total price (-1)
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: -100 || voucher?: 10      => invalid total price (-1)
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: -100 || voucher?: 30      => invalid total price (-1)
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 200 || voucher?: null     => 5
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 200 || voucher?: 10       => 5
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 200 || voucher?: 30       => 5
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 700 || voucher?: null     => 15
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 700 || voucher?: 10       => 15
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 700 || voucher?: 30       => 15
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 2200 || voucher?: null    => 25
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 2200 || voucher?: 10      => 35
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 2200 || voucher?: 30      => 55
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 4000 || voucher?: null    => 35
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 4000 || voucher?: 10      => 45
+  - TypeOfCustomer: NEW_CUSTOMER || totalPrice: 4000 || voucher?: 30      => 65
+
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: -100 || voucher?: null => invalid total price (-1)
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: -100 || voucher?: 10   => invalid total price (-1)
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: -100 || voucher?: 30   => invalid total price (-1)
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 200 || voucher?: null  => 10
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 200 || voucher?: 10    => 10
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 200 || voucher?: 30    => 10
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 700 || voucher?: null  => 20
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 700 || voucher?: 10    => 20
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 700 || voucher?: 30    => 20
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 2200 || voucher?: null => 30
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 2200 || voucher?: 10   => 40
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 2200 || voucher?: 30   => 60
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 4000 || voucher?: null => 40
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 4000 || voucher?: 10   => 50
+  - TypeOfCustomer: SILVER_CUSTOMER || totalPrice: 4000 || voucher?: 30   => 70
+
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: -100 || voucher?: null   => invalid total price (-1)
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: -100 || voucher?: 10     => invalid total price (-1)
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: -100 || voucher?: 30     => invalid total price (-1)
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 200 || voucher?: null    => 20
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 200 || voucher?: 10      => 20
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 200 || voucher?: 30      => 20
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 700 || voucher?: null    => 30
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 700 || voucher?: 10      => 30
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 700 || voucher?: 30      => 30
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 2200 || voucher?: null   => 40
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 2200 || voucher?: 10     => 50
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 2200 || voucher?: 30     => 70
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 4000 || voucher?: null   => 50
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 4000 || voucher?: 10     => 60
+  - TypeOfCustomer: GOLD_CUSTOMER || totalPrice: 4000 || voucher?: 30     => 80
