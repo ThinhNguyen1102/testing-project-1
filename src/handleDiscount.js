@@ -23,10 +23,10 @@ var Discount;
 })(Discount || (exports.Discount = Discount = {}));
 var TotalPoint;
 (function (TotalPoint) {
-    TotalPoint[TotalPoint["TOTAL_500"] = 500] = "TOTAL_500";
-    TotalPoint[TotalPoint["TOTAL_1000"] = 1000] = "TOTAL_1000";
-    TotalPoint[TotalPoint["TOTAL_1500"] = 1500] = "TOTAL_1500";
-    TotalPoint[TotalPoint["TOTAL_3000"] = 3000] = "TOTAL_3000";
+    TotalPoint[TotalPoint["TOTAL_OFF_10"] = 500] = "TOTAL_OFF_10";
+    TotalPoint[TotalPoint["TOTAL_USE_VOURCHER"] = 1000] = "TOTAL_USE_VOURCHER";
+    TotalPoint[TotalPoint["TOTAL_OFF_20"] = 1500] = "TOTAL_OFF_20";
+    TotalPoint[TotalPoint["TOTAL_OFF_30"] = 3000] = "TOTAL_OFF_30";
 })(TotalPoint || (exports.TotalPoint = TotalPoint = {}));
 /**
  * @typeOfCustomer loai khach hang
@@ -52,19 +52,17 @@ var handleDiscount = function (typeOfCustomer, totalPrice, voucher) {
             break;
     }
     // Giam gia dua tren gia tri don hang
-    if (totalPrice >= TotalPoint.TOTAL_3000) {
+    if (totalPrice >= TotalPoint.TOTAL_OFF_30) {
         totalDiscount += Discount.TOTAL_GT_3000;
     }
-    else if (totalPrice >= TotalPoint.TOTAL_500 &&
-        totalPrice < TotalPoint.TOTAL_1500) {
+    else if (totalPrice >= TotalPoint.TOTAL_OFF_10 && totalPrice < TotalPoint.TOTAL_OFF_20) {
         totalDiscount += Discount.TOTAL_GT_500;
     }
-    else if (totalPrice >= TotalPoint.TOTAL_1500 &&
-        totalPrice < TotalPoint.TOTAL_3000) {
+    else if (totalPrice >= TotalPoint.TOTAL_OFF_20 && totalPrice < TotalPoint.TOTAL_OFF_30) {
         totalDiscount += Discount.TOTAL_GT_1500;
     }
     // Giam gia dua tren voucher
-    if (voucher && totalPrice >= TotalPoint.TOTAL_1000) {
+    if (voucher && totalPrice >= TotalPoint.TOTAL_USE_VOURCHER) {
         totalDiscount += voucher;
     }
     return totalDiscount;
